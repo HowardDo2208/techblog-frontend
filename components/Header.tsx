@@ -16,6 +16,7 @@ import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import { Stack } from '@mui/material'
+import { useRouter } from 'next/router'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -73,6 +74,7 @@ export default function Header(props: HeaderProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null)
+  const router = useRouter()
 
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
@@ -96,7 +98,7 @@ export default function Header(props: HeaderProps) {
 
   const handleSearch = (value?: string) => {
     if (value) {
-      console.log('search value', value)
+      router.push(`/search?_q=${value}`)
     }
   }
 
@@ -193,10 +195,12 @@ export default function Header(props: HeaderProps) {
               <MenuIcon />
             </IconButton>
             <Typography
+              style={{ cursor: 'pointer' }}
               variant="h6"
               noWrap
               component="div"
               sx={{ display: { xs: 'none', sm: 'block' } }}
+              onClick={() => router.push('/')}
             >
               {title}
             </Typography>
