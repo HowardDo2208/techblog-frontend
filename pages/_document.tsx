@@ -5,9 +5,9 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta property="og:title" content="DEV Community 👨‍💻👨‍💻" />
-          <meta property="og:image" content="/devto.png" />
-          <link rel="icon" href="/favicon.png" />
+          <meta property="og:title" content="TechBlog 👨‍💻" />
+          <meta property="og:image" content="/blog.jpg" />
+          <link rel="icon" href="/whale.jpg" />
         </Head>
         <body>
           <Main />
