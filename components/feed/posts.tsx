@@ -81,7 +81,7 @@ const Header = ({ isActive, setIsActive }: any) => {
   )
 }
 
-function Card({
+export function PostCard({
   title,
   username,
   userProfile,
@@ -111,22 +111,27 @@ function Card({
         {/* <Image src={userProfile} w="8" borderRadius="full" /> */}
 
         <HStack d={{ base: 'flex', sm: 'block' }}>
-          <Image
-            alt="user profile"
-            src={userProfile}
-            w="8"
-            borderRadius="full"
-          />
+          {userProfile ? (
+            <Image
+              alt="user profile"
+              src={userProfile}
+              w="8"
+              borderRadius="full"
+            />
+          ) : (
+            ''
+          )}
+
           <VStack
             align="flex-start"
             spacing={0}
             d={{ base: 'flex', sm: 'none' }}
           >
             <Text color="#4d5760" fontSize="14px" fontWeight="500">
-              {username}
+              {username ? username : 'username'}
             </Text>
             <Text color="#4d5760" fontSize="12px">
-              {publishedDate}
+              {publishedDate ? publishedDate : 'published date'}
             </Text>
           </VStack>
         </HStack>
@@ -152,13 +157,17 @@ function Card({
               {title}
             </Link>
           </Heading>
-          <HStack mt="3" fontSize="14px" color="#64707d">
-            {tagList.map((tag: any, idx: number) => (
-              <Text as={Link} key={idx}>
-                #{tag}
-              </Text>
-            ))}
-          </HStack>
+          {tagList ? (
+            <HStack mt="3" fontSize="14px" color="#64707d">
+              {tagList.map((tag: any, idx: number) => (
+                <Text as={Link} key={idx}>
+                  #{tag}
+                </Text>
+              ))}
+            </HStack>
+          ) : (
+            ''
+          )}
           <HStack mt={3}>
             <Button
               leftIcon={<Image src="/assets/images/like.svg" />}
@@ -242,7 +251,7 @@ const Posts = () => {
     <Box mb="8" borderRadius="md">
       <Header isActive={isActive} setIsActive={setIsActive} />
       {data.map((post: any, idx: number) => (
-        <Card
+        <PostCard
           key={post.id}
           title={post.title}
           username={post.user.name}

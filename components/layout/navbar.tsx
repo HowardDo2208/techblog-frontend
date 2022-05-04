@@ -16,7 +16,7 @@ import {
   MenuDivider,
 } from '@chakra-ui/react'
 import Container from './container'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import { useRouter } from 'next/router'
 
 type IconButtonProps = {
@@ -40,6 +40,8 @@ const IconButton = ({ children }: IconButtonProps) => {
 
 const Navbar = () => {
   const router = useRouter()
+  const { _q } = router.query
+  const [search, setSearch] = useState(_q)
   return (
     <Box
       py="2"
@@ -67,6 +69,9 @@ const Navbar = () => {
               if (e.key === 'Enter' && e.target.value) {
                 router.push(`/search?_q=${e.target.value}`)
               }
+            }}
+            onChange={(e: any) => {
+              setSearch(e.target.value)
             }}
           />
           <Spacer />
@@ -99,11 +104,7 @@ const Navbar = () => {
                 boxShadow="4px 4px 0"
                 bgColor="gray.700"
               >
-                <Link
-                  href="#"
-                  _hover={{ textDecoration: 'none' }}
-                  isExternal
-                >
+                <Link href="#" _hover={{ textDecoration: 'none' }} isExternal>
                   <MenuItem>
                     <VStack justify="start" alignItems="left">
                       <Text fontWeight="500">Do Tan Hop</Text>

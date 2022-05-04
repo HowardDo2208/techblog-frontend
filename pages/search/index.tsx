@@ -13,7 +13,8 @@ export type SearchTargets = 'posts' | 'users'
 const SearchPage = () => {
   const router = useRouter()
   const { _q } = router.query
-  const [posts, setPosts] = useState<any[]>()
+  const [posts, setPosts] = useState<any[]>([])
+  const [users, setUsers] = useState<any[]>([])
   const [target, setTarget] = useState('posts')
 
   const fetchSearchResult = async () => {
@@ -21,8 +22,12 @@ const SearchPage = () => {
       const result = await (
         await fetch(`${API_URL}/search/${target}?_q=${_q}`)
       ).json()
-      if (result) {
-        console.log(result)
+      if (target === 'posts') {
+        setPosts(result)
+        setUsers([])
+      } else {
+        setUsers(result)
+        setPosts([])
       }
     }
   }
@@ -48,7 +53,7 @@ const SearchPage = () => {
             pt="4"
           >
             <SearchSideBar target={target} setTarget={setTarget} />
-            <SearchResults />
+            <SearchResults posts={posts} users={users} />
           </Grid>
         </Container>
       </Box>
