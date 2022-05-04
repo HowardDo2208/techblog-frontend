@@ -2,30 +2,34 @@ import { API_URL } from '../../constants'
 import { Fragment, useEffect, useState } from 'react'
 import Navbar from '../../components/layout/navbar'
 import { Box, Grid } from '@chakra-ui/react'
-import Sidebar from '../../components/layout/sidebar'
 import Container from '../../components/layout/container'
-import Listing from '../../components/listing'
-import Posts from '../../components/feed/posts'
 import Meta from '../../components/layout/meta'
 import { useRouter } from 'next/router'
+import SearchSideBar from '../../components/search/SearchSideBar'
+import SearchResults from '../../components/search/SearchResults'
+
+export type SearchTargets = 'posts' | 'users'
 
 const SearchPage = () => {
   const router = useRouter()
   const { _q } = router.query
   const [posts, setPosts] = useState<any[]>()
+  const [target, setTarget] = useState('posts')
 
   const fetchSearchResult = async () => {
-    const result = await (
-      await fetch(`${API_URL}/posts/search?_q=${_q}`)
-    ).json()
-    if (result) {
-      setPosts(result.posts || [])
+    if (_q) {
+      const result = await (
+        await fetch(`${API_URL}/search/${target}?_q=${_q}`)
+      ).json()
+      if (result) {
+        console.log(result)
+      }
     }
   }
 
   useEffect(() => {
     fetchSearchResult()
-  }, [_q])
+  }, [_q, target])
 
   return (
     <Fragment>
@@ -43,8 +47,8 @@ const SearchPage = () => {
             gap={4}
             pt="4"
           >
-            <Sidebar d={{ base: 'none', md: 'block' }} />
-            <Posts />
+            <SearchSideBar target={target} setTarget={setTarget} />
+            <SearchResults />
           </Grid>
         </Container>
       </Box>
