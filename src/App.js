@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import SuperTokens, {
+  getSuperTokensRoutesForReactRouterDom,
+} from 'supertokens-auth-react'
+import * as reactRouterDom from 'react-router-dom'
+import ThirdPartyEmailPassword, {
+  Google,
+} from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
+import Session from 'supertokens-auth-react/recipe/session'
+import { appInfo } from './config/appConfig'
+import Home from './pages/Home'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+SuperTokens.init({
+  appInfo,
+  recipeList: [
+    ThirdPartyEmailPassword.init({
+      signInAndUpFeature: {
+        providers: [Google.init()],
+      },
+    }),
+    Session.init(),
+  ],
+})
+
+class App extends React.Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />{' '}
+          {getSuperTokensRoutesForReactRouterDom(reactRouterDom)}
+        </Routes>
+      </BrowserRouter>
+    )
+  }
 }
 
-export default App;
+export default App
