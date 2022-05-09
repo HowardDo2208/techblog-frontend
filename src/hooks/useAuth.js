@@ -27,7 +27,7 @@ const useAuth = () => {
       localStorage.setItem('currentUser', JSON.stringify(responseData));
       setCurrentUser(responseData.user);
     } catch (err) {
-      console.log('error', err);
+      console.log('this is error', err);
     }
   };
 
