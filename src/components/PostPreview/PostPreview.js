@@ -6,11 +6,11 @@ import { PostTags } from '../PostTags/PostTags';
 import { AuthorInfo } from '../AuthorInfo/AuthorInfo';
 import { PostImage } from '../PostImage/PostImage';
 import { formatDate } from '../../utils';
-import { useSessionContext } from 'supertokens-auth-react/recipe/session';
+import useAuth from '../../hooks/useAuth';
 
 const PostPreview = (props) => {
   const [showModal, setShowModal] = useState(false);
-  const { userId, accessTokenPayload } = useSessionContext();
+  const { userId, currentUser } = useAuth();
 
   const { title, id, image, author, date, titleURL, tags, cover } = props;
   const createdAt = formatDate(date);

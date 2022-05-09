@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import { checkInArray } from '../../../../utils';
 import useHttpClient from '../../../../hooks/useHttpClient';
-import { useSessionContext } from 'supertokens-auth-react/recipe/session';
+import useAuth from '../../../../hooks/useAuth';
 
 const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
-  const { userId, accessTokenPayload } = useSessionContext();
+  const { userId, currentUser } = useAuth();
 
   const { sendReq } = useHttpClient();
 

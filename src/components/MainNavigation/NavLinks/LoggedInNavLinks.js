@@ -1,22 +1,19 @@
 import { RiNotificationLine } from '@react-icons/all-files/ri/RiNotificationLine';
 import React, { useState, useCallback } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 import Avatar from '../../Avatar/Avatar';
 import { Dropdown } from '../Dropdown';
 
-export const LoggedInNavLinks = ({
-  unreadNotifications,
-  setUnreadNotifications,
-  currentUser,
-  logout
-}) => {
+export const LoggedInNavLinks = ({ unreadNotifications, setUnreadNotifications, logout }) => {
   const navigate = useNavigate();
   const handleRedirect = (url) => navigate(url);
   const [showMenu, setShowMenu] = useState(false);
+  const { userId, currentUser } = useAuth();
 
   const handleClick = () => {
     setUnreadNotifications([]);
-    handleRedirect(`/users/${currentUser && currentUser.userId}/notifications`);
+    handleRedirect(`/users/${userId}/notifications`);
   };
 
   const handleDropdown = () => {
@@ -35,10 +32,7 @@ export const LoggedInNavLinks = ({
         </NavLink>
       </li>
       <li className="list__item list__item--notifs hvr-bg-lt" onClick={handleClick}>
-        <NavLink
-          className="link"
-          to={`/users/${currentUser && currentUser.userId}/notifications`}
-          exact>
+        <NavLink className="link" to={`/users/${userId}/notifications`} exact>
           <div className="link--notifs-icon">
             <RiNotificationLine size="2.5rem" />
             {unreadNotifications && unreadNotifications.length > 0 && (

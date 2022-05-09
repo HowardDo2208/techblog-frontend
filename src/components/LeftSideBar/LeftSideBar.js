@@ -8,10 +8,10 @@ import { FaDev } from '@react-icons/all-files/fa/FaDev';
 import { GrContact } from '@react-icons/all-files/gr/GrContact';
 import About from '../About/About';
 import './LeftSideBar.css';
-import { useSessionContext } from 'supertokens-auth-react/recipe/session';
+import useAuth from '../../hooks/useAuth';
 
 const LeftSideBar = () => {
-  let { userId, accessTokenPayload } = useSessionContext();
+  let { userId, currentUser } = useAuth();
 
   return (
     <>
@@ -71,11 +71,11 @@ const LeftSideBar = () => {
             </li>
           </ul>
           <div className="sidebar-tags">
-            {accessTokenPayload && accessTokenPayload.tags && accessTokenPayload.tags.length > 0 && (
+            {currentUser && currentUser.tags && currentUser.tags.length > 0 && (
               <>
                 <h3>My Tags</h3>
                 <ul className="sidebar-tags-list">
-                  {accessTokenPayload.tags.map((tag, i) => (
+                  {currentUser.tags.map((tag, i) => (
                     <li key={i} className="list__item hvr-bg-lt">
                       <Link to={`/tags/${tag.name}`}>#{tag.name}</Link>
                     </li>

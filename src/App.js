@@ -32,6 +32,7 @@ class App extends React.Component {
         <MainNavigation />
         <Routes>
           <Route path="/" element={<Home />} />
+          {getSuperTokensRoutesForReactRouterDom(reactRouterDom)}
           {/* <Route path="/users/:userId" exact>
             <UserProfile />
           </Route>
