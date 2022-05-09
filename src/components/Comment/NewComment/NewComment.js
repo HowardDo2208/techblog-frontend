@@ -27,7 +27,6 @@ export const NewComment = ({ replyId }) => {
         'POST',
         JSON.stringify(reqData),
         {
-          Authorization: `Bearer ${currentUser.token}`,
           'Content-Type': 'application/json',
         }
       );

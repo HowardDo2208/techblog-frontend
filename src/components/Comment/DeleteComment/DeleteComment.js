@@ -24,7 +24,6 @@ export const DeleteComment = ({ commentId, authorId }) => {
         JSON.stringify({ author: currentUserId }),
         {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${currentUser.token}`,
         }
       );
     } catch (err) {}

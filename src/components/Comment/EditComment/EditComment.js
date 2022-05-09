@@ -23,7 +23,6 @@ export const EditComment = ({ commentId, commentBody, setShowModal }) => {
         JSON.stringify({ body, author: currentUser.userId }),
         {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${currentUser.token}`,
         }
       );
     } catch (err) {}

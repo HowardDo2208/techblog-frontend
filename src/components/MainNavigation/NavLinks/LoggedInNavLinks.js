@@ -1,18 +1,17 @@
 import { RiNotificationLine } from '@react-icons/all-files/ri/RiNotificationLine';
 import React, { useState, useCallback } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Avatar from '../../Avatar/Avatar';
 import { Dropdown } from '../Dropdown';
-import { useHistory } from 'react-router-dom';
 
 export const LoggedInNavLinks = ({
   unreadNotifications,
   setUnreadNotifications,
   currentUser,
-  logout,
+  logout
 }) => {
-  const history = useHistory();
-  const handleRedirect = useCallback((url) => history.push(url), [history]);
+  const navigate = useNavigate();
+  const handleRedirect = (url) => navigate(url);
   const [showMenu, setShowMenu] = useState(false);
 
   const handleClick = () => {
@@ -30,35 +29,27 @@ export const LoggedInNavLinks = ({
   };
   return (
     <React.Fragment>
-      <li className='list__item list__item--mobile item--create'>
-        <NavLink className='create-link' to='/posts/new' exact>
+      <li className="list__item list__item--mobile item--create">
+        <NavLink className="create-link" to="/posts/new">
           Create Post
         </NavLink>
       </li>
-      <li
-        className='list__item list__item--notifs hvr-bg-lt'
-        onClick={handleClick}
-      >
+      <li className="list__item list__item--notifs hvr-bg-lt" onClick={handleClick}>
         <NavLink
-          className='link'
+          className="link"
           to={`/users/${currentUser && currentUser.userId}/notifications`}
-          exact
-        >
-          <div className='link--notifs-icon'>
-            <RiNotificationLine size='2.5rem' />
+          exact>
+          <div className="link--notifs-icon">
+            <RiNotificationLine size="2.5rem" />
             {unreadNotifications && unreadNotifications.length > 0 && (
-              <div className='notif__counter'>{unreadNotifications.length}</div>
+              <div className="notif__counter">{unreadNotifications.length}</div>
             )}
           </div>
         </NavLink>
       </li>
 
       <li>
-        <button
-          className='btn nav__btn'
-          onClick={handleDropdown}
-          onBlur={() => setShowMenu(false)}
-        >
+        <button className="btn nav__btn" onClick={handleDropdown} onBlur={() => setShowMenu(false)}>
           <Avatar src={currentUser && currentUser.avatar} />
         </button>
       </li>

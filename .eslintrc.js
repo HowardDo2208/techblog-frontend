@@ -1,9 +1,9 @@
-export default {
+module.exports = {
   env: {
     browser: true,
     es2021: true
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:prettier/recommended'],
+  extends: ['plugin:react/recommended'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -13,6 +13,6 @@ export default {
   },
   plugins: ['react'],
   rules: {
-    'react/react-in-jsx-scope': 'off'
+    'react/prop-types': 'off'
   }
 };

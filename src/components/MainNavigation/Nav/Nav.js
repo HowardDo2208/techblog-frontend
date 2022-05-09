@@ -2,20 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { FaDev } from '@react-icons/all-files/fa/FaDev';
 import NavLinks from '../NavLinks/NavLinks';
 import './Nav.css';
-import { SocketContext } from '../../../context/socket';
 import SideDrawer from '../SideDrawer/SideDrawer';
-import { AuthContext } from '../../../context/auth';
 import { useHttpClient } from '../../../hooks/useHttpClient';
 import { NavLink } from 'react-router-dom';
+import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 
 const Nav = ({ children, onSearchIconClick }) => {
-  const { currentUser } = useContext(AuthContext);
-  const { current } = useContext(SocketContext).socket;
-
-  let userId;
-  if (currentUser) {
-    ({ userId } = currentUser);
-  }
+  const { userId, accessTokenPayload } = useSessionContext();
 
   const { sendReq } = useHttpClient();
   const [unreadNotifications, setUnreadNotifications] = useState([]);
@@ -39,7 +32,6 @@ const Nav = ({ children, onSearchIconClick }) => {
             'GET',
             null,
             {
-              Authorization: `Bearer ${currentUser.token}`,
             }
           );
           setUnreadNotifications(responseData.notifications);
@@ -47,31 +39,28 @@ const Nav = ({ children, onSearchIconClick }) => {
       };
       fetchUnreadNotifications();
     }
-  }, [sendReq, userId, currentUser]);
+  }, [sendReq, userId, accessTokenPayload]);
 
-  useEffect(() => {
-    current?.on('notificationReceived', (data) => {
-      setUnreadNotifications((unreadNotifications) => {
-        return [...unreadNotifications, data];
-      });
-    });
-  }, [current]);
-
+  // useEffect(() => {
+  //   current?.on('notificationReceived', (data) => {
+  //     setUnreadNotifications((unreadNotifications) => {
+  //       return [...unreadNotifications, data];
+  //     });
+  //   });
+  // }, [current]);
 
   return (
-    <div className='container container-nav'>
-      {drawerIsOpen && (
-        <SideDrawer onClose={closeDrawerHandler} onClick={closeDrawerHandler} />
-      )}
+    <div className="container container-nav">
+      {drawerIsOpen && <SideDrawer onClose={closeDrawerHandler} onClick={closeDrawerHandler} />}
 
-      <div className='header__hamburger-menu' onClick={openDrawerHandler}></div>
-      <div className='header__logo-search'>
-        <NavLink to='/' className='header__logo'>
-          <FaDev size='4.125rem' />
+      <div className="header__hamburger-menu" onClick={openDrawerHandler}></div>
+      <div className="header__logo-search">
+        <NavLink to="/" className="header__logo">
+          <FaDev size="4.125rem" />
         </NavLink>
         {children}
       </div>
-      <nav className='nav'>
+      <nav className="nav">
         <NavLinks
           unreadNotifications={unreadNotifications}
           setUnreadNotifications={setUnreadNotifications}

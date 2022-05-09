@@ -29,8 +29,7 @@ export const LikeComment = ({ likes, commentId, setShowModal }) => {
         'PUT',
         JSON.stringify({ userId: currentUser.userId, commentId /* action */ }),
         {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${currentUser.token}`,
+          'Content-Type': 'application/json'
         }
       );
     } catch (err) {}
@@ -40,11 +39,7 @@ export const LikeComment = ({ likes, commentId, setShowModal }) => {
     <>
       <ErrorModal error={error} onClose={clearError} />
 
-      <LikeCommentButton
-        handleLike={handleLike}
-        isLiked={isLiked}
-        likes={likes}
-      />
+      <LikeCommentButton handleLike={handleLike} isLiked={isLiked} likes={likes} />
     </>
   );
 };
