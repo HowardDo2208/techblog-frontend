@@ -7,27 +7,36 @@ import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 const useAuth = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const { sendReq } = useHttpClient();
-  const { userId, doesSessionExist } = useSessionContext();
   const navigate = useNavigate();
-
+  const { userId, doesSessionExist } = useSessionContext();
   async function logout() {
     await signOut();
+    localStorage.removeItem('currentUser');
     navigate('/');
   }
 
+  const fetchCurrentUser = async () => {
+    try {
+      console.log('before fetch');
+      const responseData = await sendReq(
+        `${process.env.REACT_APP_BASE_URL}/users/${userId}`,
+        'GET',
+        null,
+        {}
+      );
+      localStorage.setItem('currentUser', JSON.stringify(responseData));
+      setCurrentUser(responseData.user);
+    } catch (err) {
+      console.log('error', err);
+    }
+  };
+
   useEffect(() => {
-    if (userId) {
-      const fetchCurrentUser = async () => {
-        try {
-          const responseData = await sendReq(
-            `${process.env.REACT_APP_BASE_URL}/users/${userId}`,
-            'GET',
-            null,
-            {}
-          );
-          setCurrentUser(responseData.user);
-        } catch (err) {}
-      };
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      setCurrentUser(currentUser);
+    } else if (userId) {
+      console.log('hey');
       fetchCurrentUser();
     }
   }, [userId]);

@@ -3,6 +3,7 @@ import Posts from '../../components/Post/Posts';
 import RightSideBar from '../../components/RightSideBar/RightSideBar';
 import LeftSideBar from '../../components/LeftSideBar/LeftSideBar';
 import useHttpClient from '../../hooks/useHttpClient';
+import { useSessionContext } from 'supertokens-auth-react/recipe/session';
 
 const Home = () => {
   const [tags, setTags] = useState([]);

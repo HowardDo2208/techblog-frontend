@@ -5,6 +5,7 @@ import './Nav.css';
 import SideDrawer from '../SideDrawer/SideDrawer';
 import { useHttpClient } from '../../../hooks/useHttpClient';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../../context/auth';
 import useAuth from '../../../hooks/useAuth';
 
 const Nav = ({ children, onSearchIconClick }) => {

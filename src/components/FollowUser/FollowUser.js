@@ -1,14 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../context/auth';
-import { SocketContext } from '../../context/socket';
+import useAuth from '../../hooks/useAuth';
 import useHttpClient from '../../hooks/useHttpClient';
 import { checkInArray } from '../../utils';
 import './FollowUser.css';
 
 export const FollowUser = ({ followId, setShowModal, followers, userToFollow }) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useAuth();
   const { current } = useContext(SocketContext).socket;
-  const currentUserId = currentUser && currentUser.userId;
+  const currentUserId = currentUser && currentUser.id;
   const { sendReq } = useHttpClient();
 
   const [following, setFollowing] = useState(false);

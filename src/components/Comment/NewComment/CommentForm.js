@@ -8,9 +8,9 @@ const CommentForm = ({
   hasCancelButton = false,
   initialText = '',
   handleCancel,
-  avatar,
+  avatar
 }) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useAuth();
   const [text, setText] = useState(initialText);
   const isTextAreaDisabled = text.length === 0;
   const DEFAULT_COMMENT_AVATAR =
@@ -32,34 +32,26 @@ const CommentForm = ({
     <div className={`comment-form ${submitLabel === 'Reply' && 'reply-form'}`}>
       {avatar && (
         <Avatar
-          src={
-            currentUser && currentUser.avatar
-              ? currentUser.avatar
-              : DEFAULT_COMMENT_AVATAR
-          }
+          src={currentUser && currentUser.avatar ? currentUser.avatar : DEFAULT_COMMENT_AVATAR}
         />
       )}
       <form onSubmit={commentSubmitHandle}>
         <input
-          type='textarea'
-          placeholder='Add to the discussion'
-          name='comment'
+          type="textarea"
+          placeholder="Add to the discussion"
+          name="comment"
           value={text}
           onChange={inputHandler}
           // ref={commentText}
         />
-        <div className='comments__btn'>
+        <div className="comments__btn">
           {text && (
-            <button className='btn btn--comment' disabled={isTextAreaDisabled}>
+            <button className="btn btn--comment" disabled={isTextAreaDisabled}>
               {submitLabel}
             </button>
           )}
           {hasCancelButton && (
-            <button
-              className='btn btn--dismiss'
-              type='button'
-              onClick={handleCancel}
-            >
+            <button className="btn btn--dismiss" type="button" onClick={handleCancel}>
               Dismiss
             </button>
           )}

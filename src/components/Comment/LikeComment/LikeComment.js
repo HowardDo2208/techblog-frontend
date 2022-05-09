@@ -6,8 +6,8 @@ import ErrorModal from '../../Modal/ErrorModal';
 import { LikeCommentButton } from './LikeCommentButton';
 
 export const LikeComment = ({ likes, commentId, setShowModal }) => {
-  const { currentUser } = useContext(AuthContext);
-  const currentUserId = currentUser && currentUser.userId;
+  const { currentUser } = useAuth();
+  const currentUserId = currentUser && currentUser.id;
   const { sendReq, error, clearError } = useHttpClient();
   const [isLiked, setLiked] = useState(checkInArray(likes, currentUserId));
 
@@ -27,7 +27,7 @@ export const LikeComment = ({ likes, commentId, setShowModal }) => {
       await sendReq(
         `${process.env.REACT_APP_BASE_URL}/comments/${commentId}/${action}`,
         'PUT',
-        JSON.stringify({ userId: currentUser.userId, commentId /* action */ }),
+        JSON.stringify({ userId: currentUser.id, commentId /* action */ }),
         {
           'Content-Type': 'application/json'
         }

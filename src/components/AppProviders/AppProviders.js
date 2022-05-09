@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { SearchContext } from '../../context/search';
 import '../../styles/main.css';
 import { ThirdPartyEmailPasswordAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword';
+import useAuth from '../../hooks/useAuth';
+import { AuthContext } from '../../context/auth';
+import { useEffect } from 'react';
 
 const AppProviders = ({ children }) => {
   const [searchValue, setSearchValue] = useState('');

@@ -8,10 +8,12 @@ import ThirdPartyEmailPassword, {
 import Session from 'supertokens-auth-react/recipe/session';
 import { appInfo } from './config/appConfig';
 import AppProviders from './components/AppProviders/AppProviders';
-import MainRouter from './MainRouter';
 import MainNavigation from './components/MainNavigation/MainNavigation';
 import Home from './pages/Home/Home';
 import Footer from './components/Footer/Footer';
+import UserProfile from './pages/UserProfile/UserProfile';
+import { AuthContext } from './context/auth';
+import useAuth from './hooks/useAuth';
 
 SuperTokens.init({
   appInfo,
@@ -25,52 +27,46 @@ SuperTokens.init({
   ]
 });
 
-class App extends React.Component {
-  render() {
-    return (
-      <AppProviders>
-        <MainNavigation />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {getSuperTokensRoutesForReactRouterDom(reactRouterDom)}
-          {/* <Route path="/users/:userId" exact>
-            <UserProfile />
-          </Route>
-          <Route path="/users/:userId/edit" exact>
+function App() {
+  return (
+    <AppProviders>
+      <MainNavigation />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        {getSuperTokensRoutesForReactRouterDom(reactRouterDom)}
+        <Route path="/users/:userId" element={<UserProfile />} />
+        {/* <Route path="/users/:userId/edit" exact>
             <EditUserProfile />
-          </Route>
-          <Route path="/users/:userId/readinglist" exact>
+          </Route> */}
+        {/* <Route path="/users/:userId/readinglist" exact>
             <ReadingList />
           </Route>
           <Route path="/users/:userId/notifications" exact>
             <Notifications />
-          </Route>
-          <Route path="/auth" exact>
-            <Auth newUser={false} />
-          </Route>
-          <Route path="/tags" exact>
+          </Route> */}
+        {/* <Route path="/tags" exact>
             <Tags />
           </Route>
           <Route path="/tags/:tagName" exact>
             <Tag />
-          </Route>
-          <Route path="/search/" exact>
+          </Route> */}
+        {/* <Route path="/search/" exact>
             <SearchResults />
           </Route>
           <Route path="/posts/new" exact>
             <NewPost />
-          </Route>
-          <Route path="/posts/:titleURL/:postId" exact>
+          </Route> */}
+        {/* <Route path="/posts/:titleURL/:postId" exact>
             <Post />
           </Route>
           <Route path="/posts/:titleURL/:postId/edit" exact>
             <EditPost />
           </Route> */}
-        </Routes>
-        <Footer />
-      </AppProviders>
-    );
-  }
+      </Routes>
+      <Footer />
+    </AppProviders>
+  );
 }
 
 export default App;

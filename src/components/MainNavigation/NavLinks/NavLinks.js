@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { FiSearch } from '@react-icons/all-files/fi/FiSearch';
 import { LoggedInNavLinks } from './LoggedInNavLinks';
 import { GuestNavLinks } from './GuestNavLinks';
-import { signOut } from 'supertokens-auth-react/recipe/thirdpartyemailpassword';
+import { AuthContext } from '../../../context/auth';
 import useAuth from '../../../hooks/useAuth';
 
 const NavLinks = ({ onSearchIconClick, unreadNotifications, setUnreadNotifications }) => {

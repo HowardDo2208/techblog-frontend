@@ -4,9 +4,9 @@ import useHttpClient from '../../hooks/useHttpClient';
 import { checkInArray } from '../../utils';
 
 export const FollowTag = ({ followers, tagId, setShowModal }) => {
-  const auth = useContext(AuthContext);
+  const auth = useAuth();
   const { currentUser } = auth;
-  const currentUserId = currentUser && currentUser.userId;
+  const currentUserId = currentUser && currentUser.id;
   const { sendReq } = useHttpClient();
 
   const [following, setFollowing] = useState(false);

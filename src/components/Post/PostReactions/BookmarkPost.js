@@ -8,36 +8,24 @@ export const BookmarkPost = ({
   handleReaction,
   setShowModal,
   id,
-  children,
+  children
 }) => {
-  const { currentUser } = useContext(AuthContext);
-  const currentUserId = currentUser && currentUser.userId;
+  const { currentUser } = useAuth();
+  const currentUserId = currentUser && currentUser.id;
   const action = isBookmarked ? 'unbookmark' : 'bookmark';
   const effect = isBookmarked ? 'negative' : 'positive';
 
   const handleClick = () => {
-    !currentUserId
-      ? setShowModal(true)
-      : handleReaction(action, effect, bookmarks, 'isBookmarked');
+    !currentUserId ? setShowModal(true) : handleReaction(action, effect, bookmarks, 'isBookmarked');
   };
   return (
     <>
       <div
-        className={`${
-          isBookmarked
-            ? 'reactions__block clicked--bookmark'
-            : 'reactions__block '
-        }`}
-      >
+        className={`${isBookmarked ? 'reactions__block clicked--bookmark' : 'reactions__block '}`}>
         <i
           onClick={handleClick}
-          className={`${
-            isBookmarked
-              ? 'reactions__save reactions__saved'
-              : 'reactions__save'
-          }`}
-        >
-          <BookmarkIcon state={isBookmarked} size='2.5rem' />
+          className={`${isBookmarked ? 'reactions__save reactions__saved' : 'reactions__save'}`}>
+          <BookmarkIcon state={isBookmarked} size="2.5rem" />
         </i>
         <span>{bookmarks && bookmarks.length}</span>
       </div>

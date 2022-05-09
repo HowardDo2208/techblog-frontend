@@ -11,9 +11,9 @@ export const Dropdown = ({ showMenu, currentUser, handleLogout }) => {
       <ul className="dropdown__list">
         <li className="list__item hvr-bg-lt">
           <button
-            onMouseDown={() => handleRedirect(`/users/${currentUser && currentUser.userId}`)}
+            onMouseDown={() => handleRedirect(`/users/${currentUser && currentUser.id}`)}
             className="btn dropdown__btn"
-            to={`/users/${currentUser && currentUser.userId}`}>
+            to={`/users/${currentUser && currentUser.id}`}>
             <div>{currentUser && currentUser.name}</div>
             <small className="u-name-id">
               {currentUserEmail && currentUserEmail.split('.')[0]}
@@ -29,7 +29,7 @@ export const Dropdown = ({ showMenu, currentUser, handleLogout }) => {
           <button
             className="btn dropdown__btn"
             onMouseDown={() =>
-              handleRedirect(`/users/${currentUser && currentUser.userId}/readinglist`)
+              handleRedirect(`/users/${currentUser && currentUser.id}/readinglist`)
             }>
             Reading List
           </button>
@@ -37,7 +37,7 @@ export const Dropdown = ({ showMenu, currentUser, handleLogout }) => {
         <li className="list__item hvr-bg-lt">
           <button
             className="btn dropdown__btn"
-            onMouseDown={() => handleRedirect(`/users/${currentUser && currentUser.userId}/edit`)}>
+            onMouseDown={() => handleRedirect(`/users/${currentUser && currentUser.id}/edit`)}>
             Edit Profile
           </button>
         </li>

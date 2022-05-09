@@ -6,9 +6,8 @@ import CommentForm from '../NewComment/CommentForm';
 import { CommentContext } from '../Comments';
 
 export const EditComment = ({ commentId, commentBody, setShowModal }) => {
-  const { setActiveComment, comments, setComments } =
-    useContext(CommentContext);
-  const { currentUser } = useContext(AuthContext);
+  const { setActiveComment, comments, setComments } = useContext(CommentContext);
+  const { currentUser } = useAuth();
   const { sendReq, error, clearError } = useHttpClient();
 
   const updateComment = async (body, commentId) => {
@@ -20,9 +19,9 @@ export const EditComment = ({ commentId, commentBody, setShowModal }) => {
       await sendReq(
         `${process.env.REACT_APP_BASE_URL}/comments/${commentId}`,
         'PATCH',
-        JSON.stringify({ body, author: currentUser.userId }),
+        JSON.stringify({ body, author: currentUser.id }),
         {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         }
       );
     } catch (err) {}
@@ -34,7 +33,7 @@ export const EditComment = ({ commentId, commentBody, setShowModal }) => {
     <>
       <ErrorModal error={error} onClose={clearError} />
       <CommentForm
-        submitLabel='Edit comment'
+        submitLabel="Edit comment"
         hasCancelButton={true}
         initialText={commentBody}
         handleSubmit={(text) => updateComment(text, commentId)}

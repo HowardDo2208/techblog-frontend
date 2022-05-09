@@ -8,6 +8,7 @@ import { FaDev } from '@react-icons/all-files/fa/FaDev';
 import { GrContact } from '@react-icons/all-files/gr/GrContact';
 import About from '../About/About';
 import './LeftSideBar.css';
+import { AuthContext } from '../../context/auth';
 import useAuth from '../../hooks/useAuth';
 
 const LeftSideBar = () => {

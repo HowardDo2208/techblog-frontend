@@ -9,8 +9,8 @@ export const DeletePost = ({ authorId }) => {
   const { sendReq, error, clearError } = useHttpClient();
   const history = useHistory();
   const { titleURL, postId } = useParams();
-  const { currentUser } = useContext(AuthContext);
-  const currentUserId = currentUser && currentUser.userId;
+  const { currentUser } = useAuth();
+  const currentUserId = currentUser && currentUser.id;
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const showDeleteWarningHandler = () => {
