@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Posts from '../../components/Post/Posts';
-import RightSideBar from '../../components/RightSideBar/RightSideBar';
-import LeftSideBar from '../../components/LeftSideBar/LeftSideBar';
-import useHttpClient from '../../hooks/useHttpClient';
-import { useSessionContext } from 'supertokens-auth-react/recipe/session';
+import React, { useState, useEffect, useContext } from 'react'
+import Posts from '../../components/Post/Posts'
+import RightSideBar from '../../components/RightSideBar/RightSideBar'
+import LeftSideBar from '../../components/LeftSideBar/LeftSideBar'
+import useHttpClient from '../../hooks/useHttpClient'
+import { useSessionContext } from 'supertokens-auth-react/recipe/session'
+import Layout from '../../components/Layout/Layout'
 
 const Home = () => {
-  const [tags, setTags] = useState([]);
-  const { sendReq, isLoading } = useHttpClient();
+  const [tags, setTags] = useState([])
+  const { sendReq, isLoading } = useHttpClient()
 
   // useEffect(() => {
   //   const fetchTags = async () => {
@@ -20,14 +21,16 @@ const Home = () => {
   // }, [sendReq]);
 
   return (
-    <div className="container-layout">
-      <div className="container-sidebar">
-        <LeftSideBar />
+    <Layout>
+      <div className="container-layout">
+        <div className="container-sidebar">
+          <LeftSideBar />
+        </div>
+        <Posts cover={true} />
+        {/* <RightSideBar tags={tags} isLoading={isLoading} /> */}
       </div>
-      <Posts cover={true} />
-      {/* <RightSideBar tags={tags} isLoading={isLoading} /> */}
-    </div>
-  );
-};
+    </Layout>
+  )
+}
 
-export default Home;
+export default Home

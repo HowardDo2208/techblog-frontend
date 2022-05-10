@@ -1,20 +1,19 @@
-import React from 'react';
-import './AuthorInfo.css';
+import React from 'react'
+import './AuthorInfo.css'
 
 export const AuthorInfo = (props) => {
-  const { author, date, status } = props;
+  const { author, date, status } = props
   if (status === 'preview') {
     return (
       <div className="author__details">
-        <p className="author__name">{author ?? 'mock author'}</p>
-        <p className="author__date">{date ?? 'mock date'}</p>
+        <p className="author__name">{author.name}</p>
+        <p className="author__date">{date}</p>
       </div>
-    );
+    )
   }
   return (
     <>
-      author full info
-      {/* {author.bio && (
+      {author.bio && (
         <div className="author__bio">
           <p>{author.bio}</p>
         </div>
@@ -42,7 +41,7 @@ export const AuthorInfo = (props) => {
           <h4>Joined</h4>
           <p>{author.doB}</p>
         </div>
-      )} */}
+      )}
     </>
-  );
-};
+  )
+}

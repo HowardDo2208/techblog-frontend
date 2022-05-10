@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
-import { FiSearch } from '@react-icons/all-files/fi/FiSearch';
-import { LoggedInNavLinks } from './LoggedInNavLinks';
-import { GuestNavLinks } from './GuestNavLinks';
-import { AuthContext } from '../../../context/auth';
-import useAuth from '../../../hooks/useAuth';
+import React, { useContext } from 'react'
+import { FiSearch } from '@react-icons/all-files/fi/FiSearch'
+import { LoggedInNavLinks } from './LoggedInNavLinks'
+import { GuestNavLinks } from './GuestNavLinks'
+import { AuthContext } from '../../../context/auth'
+import useAuth from '../../../hooks/useAuth'
 
 const NavLinks = ({ onSearchIconClick, unreadNotifications, setUnreadNotifications }) => {
-  let { doesSessionExist, userId, currentUser, logout } = useAuth();
+  let { doesSessionExist, userId, currentUser, logout } = useAuth()
 
   const handleSearchClick = () => {
-    onSearchIconClick();
-  };
+    onSearchIconClick()
+  }
 
   return (
     <ul className="nav__list">
@@ -31,7 +31,7 @@ const NavLinks = ({ onSearchIconClick, unreadNotifications, setUnreadNotificatio
         <GuestNavLinks loginFirst={true} />
       )}
     </ul>
-  );
-};
+  )
+}
 
-export default NavLinks;
+export default NavLinks

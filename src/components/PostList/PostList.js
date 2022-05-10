@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
-import PostPreview from '../PostPreview/PostPreview';
-import SkeletonPostList from '../Skeleton/SkeletonPostList';
-import './PostList.css';
+import React, { useEffect } from 'react'
+import PostPreview from '../PostPreview/PostPreview'
+import SkeletonPostList from '../Skeleton/SkeletonPostList'
+import './PostList.css'
 
 const PostList = (props) => {
-  const { items, isLoading } = props;
+  const { items, isLoading } = props
 
   return (
     <div className="container container-posts">
-      {props.isLoading && <SkeletonPostList type={!props.cover && 'mini'} />}
-      {!props.isLoading && (
+      {isLoading && <SkeletonPostList type={!props.cover && 'mini'} />}
+      {!isLoading && (
         <ul>
-          {props.items &&
+          {items &&
             props.items.map((post, i) => {
               return (
                 <PostPreview
@@ -19,23 +19,23 @@ const PostList = (props) => {
                   key={post.id}
                   id={post.id}
                   title={post.title}
-                  body={post.content}
+                  body={post.body}
                   image={post.image}
                   date={post.date}
                   author={props.author || post.author}
                   tags={post.tags}
-                  titleURL={post.titleURL}
+                  slug={post.slug}
                   likes={post.likes}
                   unicorns={post.unicorns}
                   bookmarks={post.bookmarks}
                   comments={post.comments}
                 />
-              );
+              )
             })}
         </ul>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default PostList;
+export default PostList

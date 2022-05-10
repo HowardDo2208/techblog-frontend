@@ -7,6 +7,7 @@ import ErrorModal from '../../components/Modal/ErrorModal'
 import SkeletonElement from '../../components/Skeleton/SkeletonElement'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
+import Layout from '../../components/Layout/Layout'
 
 const NewPost = () => {
   const auth = useAuth()
@@ -30,7 +31,7 @@ const NewPost = () => {
   }
 
   return (
-    <>
+    <Layout>
       <ErrorModal error={error} onClose={clearError} />
       {isLoading ? (
         renderRepeatedSkeletons(<SkeletonElement type="text" />, 20)
@@ -45,7 +46,7 @@ const NewPost = () => {
           </form>
         </div>
       )}
-    </>
+    </Layout>
   )
 }
 

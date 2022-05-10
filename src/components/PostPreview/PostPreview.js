@@ -1,23 +1,19 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import PreviewReactions from '../PostPreview/PreviewReactions';
-import Avatar from '../Avatar/Avatar';
-import { PostTags } from '../PostTags/PostTags';
-import { AuthorInfo } from '../AuthorInfo/AuthorInfo';
-import { PostImage } from '../PostImage/PostImage';
-import { formatDate } from '../../utils';
-import useAuth from '../../hooks/useAuth';
+import React, { useState, useContext } from 'react'
+import { Link } from 'react-router-dom'
+import PreviewReactions from '../PostPreview/PreviewReactions'
+import Avatar from '../Avatar/Avatar'
+import { PostTags } from '../PostTags/PostTags'
+import { AuthorInfo } from '../AuthorInfo/AuthorInfo'
+import { PostImage } from '../PostImage/PostImage'
+import { formatDate } from '../../utils'
+import useAuth from '../../hooks/useAuth'
 
 const PostPreview = (props) => {
-  const [showModal, setShowModal] = useState(false);
-  const { userId, currentUser } = useAuth();
+  const [showModal, setShowModal] = useState(false)
+  const { userId, currentUser } = useAuth()
 
-  const { title, id, image, author, date, titleURL, tags, cover } = props;
-  const createdAt = formatDate(date);
-
-  useState(() => {
-    console.log('props', props);
-  });
+  const { title, id, image, author, date, slug, tags, cover } = props
+  const createdAt = formatDate(date)
 
   return (
     <div className="preview flow-content">
@@ -29,7 +25,7 @@ const PostPreview = (props) => {
         <AuthorInfo status="preview" author={author} date={createdAt} />
       </div>
       <div className="preview__details flow-content">
-        <Link to={`/posts/${titleURL}/${id}`} className="title-link">
+        <Link to={`/posts/${slug}/${id}`} className="title-link">
           <h2>{title}</h2>
         </Link>
         <PostTags tags={tags} />
@@ -41,7 +37,7 @@ const PostPreview = (props) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PostPreview;
+export default PostPreview
