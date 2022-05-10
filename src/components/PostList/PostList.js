@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PostPreview from '../PostPreview/PostPreview';
 import SkeletonPostList from '../Skeleton/SkeletonPostList';
 import './PostList.css';
 
 const PostList = (props) => {
+  const { items, isLoading } = props;
+
   return (
-    <div className='container container-posts'>
+    <div className="container container-posts">
       {props.isLoading && <SkeletonPostList type={!props.cover && 'mini'} />}
       {!props.isLoading && (
         <ul>
@@ -17,7 +19,7 @@ const PostList = (props) => {
                   key={post.id}
                   id={post.id}
                   title={post.title}
-                  body={post.body}
+                  body={post.content}
                   image={post.image}
                   date={post.date}
                   author={props.author || post.author}

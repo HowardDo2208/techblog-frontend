@@ -1,43 +1,40 @@
-import { useContext } from 'react'
-import queryString from 'query-string'
-import { useHttpClient } from './useHttpClient'
-import { SearchContext } from '../context/search'
-import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react';
+import queryString from 'query-string';
+import { useHttpClient } from './useHttpClient';
+import { SearchContext } from '../context/search';
+import { useNavigate } from 'react-router-dom';
 
 const useSearch = () => {
-  const { setSearchValue, setSearchResults } = useContext(SearchContext)
+  const { setSearchValue, setSearchResults } = useContext(SearchContext);
 
-  const { sendReq } = useHttpClient()
-  const navigate = useNavigate()
+  const { sendReq } = useHttpClient();
+  const navigate = useNavigate();
 
   const search = async (value) => {
     if (value) {
-      setSearchValue(value)
+      setSearchValue(value);
       try {
-        const data = await list({ search: value || undefined })
-        setSearchResults(data)
-        navigate(`/search/?q=${value}`)
+        const data = await list({ _q: value || undefined });
+        setSearchResults(data);
+        navigate(`/search/?_q=${value}`);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     } else {
-      setSearchResults([])
+      setSearchResults([]);
     }
-  }
+  };
 
   const list = async (params) => {
-    const query = queryString.stringify(params)
+    const query = queryString.stringify(params);
     try {
-      const responseData = await sendReq(
-        `${process.env.REACT_APP_BASE_URL}/posts/search?${query}`
-      )
-      return responseData.posts
+      const responseData = await sendReq(`${process.env.REACT_APP_BASE_URL}/posts/search?${query}`);
+      return responseData;
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
-  return { search }
-}
+  };
+  return { search };
+};
 
-export default useSearch
-
+export default useSearch;

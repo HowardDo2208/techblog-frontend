@@ -14,6 +14,8 @@ import Footer from './components/Footer/Footer';
 import UserProfile from './pages/UserProfile/UserProfile';
 import { AuthContext } from './context/auth';
 import useAuth from './hooks/useAuth';
+import SearchResults from './pages/SearchResults/SearchResults';
+import NewPost from './pages/NewPost/NewPost';
 
 SuperTokens.init({
   appInfo,
@@ -51,12 +53,8 @@ function App() {
           <Route path="/tags/:tagName" exact>
             <Tag />
           </Route> */}
-        {/* <Route path="/search/" exact>
-            <SearchResults />
-          </Route>
-          <Route path="/posts/new" exact>
-            <NewPost />
-          </Route> */}
+        <Route path="/search" element={<SearchResults />} />
+        <Route path="/posts/new" element={<NewPost />} />
         {/* <Route path="/posts/:titleURL/:postId" exact>
             <Post />
           </Route>

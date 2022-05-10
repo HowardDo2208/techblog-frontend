@@ -10,8 +10,8 @@ function createValidationRule(ruleName, errorMessage, validateFunc) {
   return {
     name: ruleName,
     message: errorMessage,
-    validate: validateFunc,
-  };
+    validate: validateFunc
+  }
 }
 
 export function requiredRule(inputName) {
@@ -19,7 +19,7 @@ export function requiredRule(inputName) {
     'required',
     `${inputName} required`,
     (inputValue, formObj) => inputValue.length !== 0
-  );
+  )
 }
 
 export function minLengthRule(inputName, minCharacters) {
@@ -27,7 +27,7 @@ export function minLengthRule(inputName, minCharacters) {
     'minLength',
     `${inputName} should contain atleast ${minCharacters} characters`,
     (inputValue, formObj) => inputValue.length >= minCharacters
-  );
+  )
 }
 
 export function maxLengthRule(inputName, maxCharacters) {
@@ -35,7 +35,7 @@ export function maxLengthRule(inputName, maxCharacters) {
     'minLength',
     `${inputName} cannot contain more than ${maxCharacters} characters`,
     (inputValue, formObj) => inputValue.length <= maxCharacters
-  );
+  )
 }
 
 export function passwordMatchRule() {
@@ -43,5 +43,5 @@ export function passwordMatchRule() {
     'passwordMatch',
     `passwords do not match`,
     (inputValue, formObj) => inputValue === formObj.password.value
-  );
+  )
 }

@@ -15,8 +15,11 @@ const PostPreview = (props) => {
   const { title, id, image, author, date, titleURL, tags, cover } = props;
   const createdAt = formatDate(date);
 
-  return;
-  id ? (
+  useState(() => {
+    console.log('props', props);
+  });
+
+  return (
     <div className="preview flow-content">
       {cover && (
         <PostImage link={`/posts/${titleURL}/${id}`} src={image} alt={`Cover image for ${title}`} />
@@ -38,8 +41,6 @@ const PostPreview = (props) => {
         />
       </div>
     </div>
-  ) : (
-    <div>Loading...</div>
   );
 };
 
