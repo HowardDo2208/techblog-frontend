@@ -1,29 +1,29 @@
-import React, { useContext, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { AuthContext } from '../../context/auth';
-import useHttpClient from '../../hooks/useHttpClient';
-import DeletionModal from '../Modal/DeletionModal';
-import ErrorModal from '../Modal/ErrorModal';
+import React, { useContext, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import useAuth from '../../hooks/useAuth'
+import useHttpClient from '../../hooks/useHttpClient'
+import DeletionModal from '../Modal/DeletionModal'
+import ErrorModal from '../Modal/ErrorModal'
 
 export const DeletePost = ({ authorId }) => {
-  const { sendReq, error, clearError } = useHttpClient();
-  const history = useHistory();
-  const { titleURL, postId } = useParams();
-  const { currentUser } = useAuth();
-  const currentUserId = currentUser && currentUser.id;
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const { sendReq, error, clearError } = useHttpClient()
+  const navigate = useNavigate()
+  const { titleURL, postId } = useParams()
+  const { currentUser } = useAuth()
+  const currentUserId = currentUser && currentUser.id
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
 
   const showDeleteWarningHandler = () => {
-    setShowConfirmModal(true);
-  };
+    setShowConfirmModal(true)
+  }
 
   const cancelDeleteWarningHandler = () => {
-    setShowConfirmModal(false);
-  };
+    setShowConfirmModal(false)
+  }
 
   const confirmDeleteWarningHandler = () => {
-    handleDelete();
-  };
+    handleDelete()
+  }
 
   const handleDelete = async () => {
     try {
@@ -34,10 +34,10 @@ export const DeletePost = ({ authorId }) => {
         {
           'Content-Type': 'application/json'
         }
-      );
-      history.push('/');
+      )
+      navigate('/')
     } catch (err) {}
-  };
+  }
   return (
     <>
       <ErrorModal error={error} onClose={clearError} />
@@ -54,5 +54,5 @@ export const DeletePost = ({ authorId }) => {
         </button>
       )}
     </>
-  );
-};
+  )
+}

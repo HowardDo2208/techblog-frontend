@@ -1,17 +1,15 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../../context/auth';
-import { SocketContext } from '../../../context/socket';
-import useHttpClient from '../../../hooks/useHttpClient';
-import ErrorModal from '../../Modal/ErrorModal';
-import CommentForm from './CommentForm';
-import { CommentContext } from '../Comments';
+import React, { useContext } from 'react'
+import useHttpClient from '../../../hooks/useHttpClient'
+import ErrorModal from '../../Modal/ErrorModal'
+import CommentForm from './CommentForm'
+import { CommentContext } from '../Comments'
+import useAuth from '../../../hooks/useAuth'
 
 export const NewComment = ({ replyId }) => {
-  const { setActiveComment, setComments, postId, postAuthor } = useContext(CommentContext);
-  const { currentUser } = useAuth();
-  const { socket } = useContext(SocketContext);
-  const { sendReq, error, clearError } = useHttpClient();
-  const currentUserId = currentUser && currentUser.id;
+  const { setActiveComment, setComments, postId, postAuthor } = useContext(CommentContext)
+  const { currentUser } = useAuth()
+  const { sendReq, error, clearError } = useHttpClient()
+  const currentUserId = currentUser && currentUser.id
   const createComment = async (text, parentId = null) => {
     const reqData = {
       parentPost: postId,
@@ -19,7 +17,7 @@ export const NewComment = ({ replyId }) => {
       author: currentUserId,
       parentId,
       userId: currentUserId
-    };
+    }
     try {
       const newComment = await sendReq(
         `${process.env.REACT_APP_BASE_URL}/comments`,
@@ -28,8 +26,8 @@ export const NewComment = ({ replyId }) => {
         {
           'Content-Type': 'application/json'
         }
-      );
-      setComments((comments = []) => [newComment.comment, ...comments]);
+      )
+      setComments((comments = []) => [newComment.comment, ...comments])
 
       // setComments((comments) => [newComment.comment, ...comments]);
       if (socket.current) {
@@ -37,11 +35,11 @@ export const NewComment = ({ replyId }) => {
           sender: currentUser,
           postId,
           receiver: postAuthor
-        });
+        })
       }
     } catch (err) {}
-    setActiveComment(null);
-  };
+    setActiveComment(null)
+  }
   return (
     <>
       <ErrorModal error={error} onClose={clearError} />
@@ -52,5 +50,5 @@ export const NewComment = ({ replyId }) => {
         handleCancel={() => setActiveComment(null)}
       />
     </>
-  );
-};
+  )
+}

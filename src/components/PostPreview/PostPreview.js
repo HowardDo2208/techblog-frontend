@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PreviewReactions from '../PostPreview/PreviewReactions'
 import Avatar from '../Avatar/Avatar'
@@ -18,7 +18,7 @@ const PostPreview = (props) => {
   return (
     <div className="preview flow-content">
       {cover && (
-        <PostImage link={`/posts/${titleURL}/${id}`} src={image} alt={`Cover image for ${title}`} />
+        <PostImage link={`/posts/${slug}/${id}`} src={image} alt={`Cover image for ${title}`} />
       )}
       <div className="preview__author">
         <Avatar link={`/users/${author.id}`} src={author.avatar} />

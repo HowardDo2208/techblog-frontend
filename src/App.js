@@ -16,6 +16,8 @@ import { AuthContext } from './context/auth'
 import useAuth from './hooks/useAuth'
 import SearchResults from './pages/SearchResults/SearchResults'
 import NewPost from './pages/NewPost/NewPost'
+import EditUserProfile from './pages/EditUserProfile/EditUserProfile'
+import PostDetail from './pages/PostDetail/PostDetail'
 
 SuperTokens.init({
   appInfo,
@@ -36,9 +38,7 @@ function App() {
         <Route path="/" element={<Home />} />
         {getSuperTokensRoutesForReactRouterDom(reactRouterDom)}
         <Route path="/users/:userId" element={<UserProfile />} />
-        {/* <Route path="/users/:userId/edit" exact>
-            <EditUserProfile />
-          </Route> */}
+        <Route path="/users/:userId/edit" element={<EditUserProfile />} />
         {/* <Route path="/users/:userId/readinglist" exact>
             <ReadingList />
           </Route>
@@ -53,10 +53,8 @@ function App() {
           </Route> */}
         <Route path="/search" element={<SearchResults />} />
         <Route path="/posts/new" element={<NewPost />} />
-        {/* <Route path="/posts/:titleURL/:postId" exact>
-            <Post />
-          </Route>
-          <Route path="/posts/:titleURL/:postId/edit" exact>
+        <Route path="/posts/:slug/:postId" element={<PostDetail />} />
+        {/* <Route path="/posts/:titleURL/:postId/edit" exact>
             <EditPost />
           </Route> */}
       </Routes>
