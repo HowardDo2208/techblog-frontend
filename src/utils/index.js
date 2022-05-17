@@ -31,7 +31,7 @@ export const getReplies = (comments, commentId) => {
   return (
     comments &&
     comments
-      .filter((comment) => comment && comment.parentId === commentId)
+      .filter((comment) => comment && comment.parentComment?.id === commentId)
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
   )
 }

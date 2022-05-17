@@ -1,28 +1,29 @@
-import React, { useContext, useState } from 'react';
-import { AuthContext } from '../../../context/auth';
-import useHttpClient from '../../../hooks/useHttpClient';
-import { checkInArray } from '../../../utils';
-import ErrorModal from '../../Modal/ErrorModal';
-import { LikeCommentButton } from './LikeCommentButton';
+import React, { useContext, useState } from 'react'
+import { AuthContext } from '../../../context/auth'
+import useAuth from '../../../hooks/useAuth'
+import useHttpClient from '../../../hooks/useHttpClient'
+import { checkInArray } from '../../../utils'
+import ErrorModal from '../../Modal/ErrorModal'
+import { LikeCommentButton } from './LikeCommentButton'
 
 export const LikeComment = ({ likes, commentId, setShowModal }) => {
-  const { currentUser } = useAuth();
-  const currentUserId = currentUser && currentUser.id;
-  const { sendReq, error, clearError } = useHttpClient();
-  const [isLiked, setLiked] = useState(checkInArray(likes, currentUserId));
+  const { currentUser } = useAuth()
+  const currentUserId = currentUser && currentUser.id
+  const { sendReq, error, clearError } = useHttpClient()
+  const [isLiked, setLiked] = useState(checkInArray(likes, currentUserId))
 
   const handleLike = async () => {
     if (!currentUserId) {
-      setShowModal(true);
-      return;
+      setShowModal(true)
+      return
     }
-    let action = checkInArray(likes, currentUserId) ? 'unlike' : 'like';
+    let action = checkInArray(likes, currentUserId) ? 'unlike' : 'like'
     if (action === 'unlike') {
-      likes.splice(likes.indexOf(currentUserId), 1);
+      likes.splice(likes.indexOf(currentUserId), 1)
     } else {
-      likes.push(currentUserId);
+      likes.push(currentUserId)
     }
-    setLiked((isLiked) => !isLiked);
+    setLiked((isLiked) => !isLiked)
     try {
       await sendReq(
         `${process.env.REACT_APP_BASE_URL}/comments/${commentId}/${action}`,
@@ -31,9 +32,9 @@ export const LikeComment = ({ likes, commentId, setShowModal }) => {
         {
           'Content-Type': 'application/json'
         }
-      );
+      )
     } catch (err) {}
-  };
+  }
 
   return (
     <>
@@ -41,5 +42,5 @@ export const LikeComment = ({ likes, commentId, setShowModal }) => {
 
       <LikeCommentButton handleLike={handleLike} isLiked={isLiked} likes={likes} />
     </>
-  );
-};
+  )
+}

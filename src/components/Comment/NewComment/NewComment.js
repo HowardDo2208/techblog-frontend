@@ -15,8 +15,7 @@ export const NewComment = ({ replyId }) => {
       parentPost: postId,
       body: text,
       author: currentUserId,
-      parentId,
-      userId: currentUserId
+      parentId
     }
     try {
       const newComment = await sendReq(
@@ -27,16 +26,9 @@ export const NewComment = ({ replyId }) => {
           'Content-Type': 'application/json'
         }
       )
-      setComments((comments = []) => [newComment.comment, ...comments])
+      setComments((comments) => [newComment, ...comments])
 
       // setComments((comments) => [newComment.comment, ...comments]);
-      if (socket.current) {
-        socket.current.emit('comment', {
-          sender: currentUser,
-          postId,
-          receiver: postAuthor
-        })
-      }
     } catch (err) {}
     setActiveComment(null)
   }

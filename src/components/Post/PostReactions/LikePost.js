@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../../context/auth';
-import { LikeIcon } from '../../Icons/Icons';
+import React, { useContext } from 'react'
+import { AuthContext } from '../../../context/auth'
+import useAuth from '../../../hooks/useAuth'
+import { LikeIcon } from '../../Icons/Icons'
 
 export const LikePost = ({ likes, handleReaction, isLiked, setShowModal }) => {
-  const { currentUser } = useAuth();
-  const currentUserId = currentUser && currentUser.id;
-  const action = isLiked ? 'unlike' : 'like';
-  const effect = isLiked ? 'negative' : 'positive';
+  const { currentUser } = useAuth()
+  const currentUserId = currentUser && currentUser.id
+  const action = isLiked ? 'unlike' : 'like'
+  const effect = isLiked ? 'negative' : 'positive'
 
   const handleClick = () => {
-    !currentUserId ? setShowModal(true) : handleReaction(action, effect, likes, 'isLiked');
-  };
+    !currentUserId ? setShowModal(true) : handleReaction(action, effect, likes, 'isLiked')
+  }
 
   return (
     <div className={`${isLiked ? 'reactions__block clicked--like' : 'reactions__block'}`}>
@@ -21,5 +22,5 @@ export const LikePost = ({ likes, handleReaction, isLiked, setShowModal }) => {
       </i>
       <span>{likes && likes.length}</span>
     </div>
-  );
-};
+  )
+}

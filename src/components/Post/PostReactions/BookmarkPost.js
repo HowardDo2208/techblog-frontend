@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../../context/auth';
-import { BookmarkIcon } from '../../Icons/Icons';
+import React, { useContext } from 'react'
+import { AuthContext } from '../../../context/auth'
+import useAuth from '../../../hooks/useAuth'
+import { BookmarkIcon } from '../../Icons/Icons'
 
 export const BookmarkPost = ({
   bookmarks,
@@ -10,14 +11,14 @@ export const BookmarkPost = ({
   id,
   children
 }) => {
-  const { currentUser } = useAuth();
-  const currentUserId = currentUser && currentUser.id;
-  const action = isBookmarked ? 'unbookmark' : 'bookmark';
-  const effect = isBookmarked ? 'negative' : 'positive';
+  const { currentUser } = useAuth()
+  const currentUserId = currentUser && currentUser.id
+  const action = isBookmarked ? 'unbookmark' : 'bookmark'
+  const effect = isBookmarked ? 'negative' : 'positive'
 
   const handleClick = () => {
-    !currentUserId ? setShowModal(true) : handleReaction(action, effect, bookmarks, 'isBookmarked');
-  };
+    !currentUserId ? setShowModal(true) : handleReaction(action, effect, bookmarks, 'isBookmarked')
+  }
   return (
     <>
       <div
@@ -30,5 +31,5 @@ export const BookmarkPost = ({
         <span>{bookmarks && bookmarks.length}</span>
       </div>
     </>
-  );
-};
+  )
+}

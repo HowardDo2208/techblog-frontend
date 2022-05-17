@@ -15,13 +15,13 @@ const Comments = ({ postAuthor, postId }) => {
   const currentUserId = currentUser && currentUser.id
   const [activeComment, setActiveComment] = useState(null)
   const [comments, setComments] = useState([])
-  const rootComments = comments && comments.filter((comment) => comment && !comment.parentId)
+  const rootComments = comments && comments.filter((comment) => comment && !comment.parentComment)
   const { sendReq, error, clearError } = useHttpClient()
   useEffect(() => {
     const fetchComments = async () => {
       try {
         const responseData = await sendReq(`${process.env.REACT_APP_BASE_URL}/comments/${postId}`)
-        setComments(responseData.comments)
+        setComments(responseData)
       } catch (err) {}
     }
     fetchComments()
@@ -44,10 +44,10 @@ const Comments = ({ postAuthor, postId }) => {
         {rootComments &&
           rootComments.map((comment) => (
             <Comment
-              key={comment._id}
+              key={comment.id}
               comment={comment}
-              replies={getReplies(comments, comment._id)}
-              parentId={comment.parentId}
+              replies={getReplies(comments, comment.id)}
+              parentId={comment.parentComment?.id}
               currentUserId={currentUserId}
             />
           ))}

@@ -1,22 +1,16 @@
-import React from 'react';
-import { LikePost } from './LikePost';
-import { UnicornPost } from './UnicornPost';
-import { BookmarkPost } from './BookmarkPost';
-import usePostReaction from './hooks/usePostReaction';
-import './PostReactions.css';
+import React from 'react'
+import { LikePost } from './LikePost'
+import { UnicornPost } from './UnicornPost'
+import { BookmarkPost } from './BookmarkPost'
+import usePostReaction from './hooks/usePostReaction'
+import './PostReactions.css'
 
 const PostReactions = ({ post, setShowModal, handleInteraction }) => {
-  const { likes, unicorns, bookmarks, id, author } = post;
-  const { state, handleReaction } = usePostReaction(
-    likes,
-    unicorns,
-    bookmarks,
-    id,
-    author
-  );
-  const { isLiked, isUnicorned, isBookmarked } = state;
+  const { likes, unicorns, bookmarks, id, author } = post
+  const { state, handleReaction } = usePostReaction(likes, unicorns, bookmarks, id, author)
+  const { isLiked, isUnicorned, isBookmarked } = state
   return (
-    <div className='post__reactions'>
+    <div className="post__reactions">
       <LikePost
         likes={likes}
         isLiked={isLiked}
@@ -36,7 +30,7 @@ const PostReactions = ({ post, setShowModal, handleInteraction }) => {
         handleReaction={handleReaction}
       />
     </div>
-  );
-};
+  )
+}
 
-export default PostReactions;
+export default PostReactions

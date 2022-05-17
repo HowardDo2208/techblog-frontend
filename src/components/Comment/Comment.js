@@ -1,37 +1,37 @@
-import { useContext, useState } from 'react';
-import React from 'react';
-import { formatDate, isEditing, isReplying } from '../../utils';
-import AuthModal from '../Modal/AuthModal';
-import Avatar from '../Avatar/Avatar';
-import { ReplyButton } from './ReplyButton';
-import { EditCommentButton } from './EditComment/EditCommentButton';
-import { LikeComment } from './LikeComment/LikeComment';
-import { EditComment } from './EditComment/EditComment';
-import { NewComment } from './NewComment/NewComment';
-import { DeleteComment } from './DeleteComment/DeleteComment';
-import { CommentContext } from './Comments';
+import { useContext, useState } from 'react'
+import React from 'react'
+import { formatDate, isEditing, isReplying } from '../../utils'
+import AuthModal from '../Modal/AuthModal'
+import Avatar from '../Avatar/Avatar'
+import { ReplyButton } from './ReplyButton'
+import { EditCommentButton } from './EditComment/EditCommentButton'
+import { LikeComment } from './LikeComment/LikeComment'
+import { EditComment } from './EditComment/EditComment'
+import { NewComment } from './NewComment/NewComment'
+import { DeleteComment } from './DeleteComment/DeleteComment'
+import { CommentContext } from './Comments'
 
 const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
-  const { activeComment } = useContext(CommentContext);
-  const [showModal, setShowModal] = useState(false);
-  const createdAt = formatDate(comment.date);
+  const { activeComment } = useContext(CommentContext)
+  const [showModal, setShowModal] = useState(false)
+  const createdAt = formatDate(comment.publishedAt)
   return (
     <>
-      <div className='container-comment'>
+      <div className="container-comment">
         <Avatar
-          className='author__image--comment'
+          className="author__image--comment"
           src={`${comment.author.avatar}`}
           link={`/users/${comment.author.id}`}
         />
-        <div className='comment'>
-          <div className='comment__content'>
-            <div className='comment__meta'>
-              <div className='comment__author'>{comment.author.name}</div>
+        <div className="comment">
+          <div className="comment__content">
+            <div className="comment__meta">
+              <div className="comment__author">{comment.author.name}</div>
               <span>{createdAt}</span>
             </div>
 
             {!isEditing(activeComment, comment.id) ? (
-              <div className='comment__body'>{comment.body}</div>
+              <div className="comment__body">{comment.body}</div>
             ) : (
               <EditComment
                 commentId={comment.id}
@@ -41,8 +41,8 @@ const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
             )}
           </div>
           <AuthModal onClose={() => setShowModal(false)} show={showModal} />
-          <div className='preview__reactions'>
-            <div className='preview__reactions--left'>
+          <div className="preview__reactions">
+            <div className="preview__reactions--left">
               <LikeComment
                 likes={comment.likes}
                 commentId={comment.id}
@@ -55,16 +55,13 @@ const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
               />
             </div>
 
-            <div className='preview__reactions--right'>
+            <div className="preview__reactions--right">
               <EditCommentButton
                 currentUserId={currentUserId}
                 commentId={comment.id}
                 authorId={comment.author.id}
               />
-              <DeleteComment
-                commentId={comment.id}
-                authorId={comment.author.id}
-              />
+              <DeleteComment commentId={comment.id} authorId={comment.author.id} />
             </div>
           </div>
         </div>
@@ -73,12 +70,12 @@ const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
       {isReplying(activeComment, comment.id) && (
         <NewComment replyId={parentId ? parentId : comment.id} />
       )}
-      <div className='replies' style={{ marginLeft: '5rem' }}>
+      <div className="replies" style={{ marginLeft: '5rem' }}>
         {replies.length > 0 &&
           replies.map((reply) => (
             <Comment
               comment={reply}
-              key={reply._id}
+              key={reply.id}
               replies={[]}
               parentId={comment.id}
               currentUserId={currentUserId}
@@ -86,7 +83,7 @@ const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
           ))}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Comment;
+export default Comment
