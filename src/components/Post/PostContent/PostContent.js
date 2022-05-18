@@ -19,7 +19,7 @@ const PostContent = ({ post, handleDelete }) => {
   const currentUserId = currentUser && currentUser.id
 
   return (
-    <div className="post">
+    <div className="post" style={{ width: '700px' }}>
       <PostImage src={image} alt={`Cover image for ${title}`} />
       <div className="post__body">
         <div className="post__author">

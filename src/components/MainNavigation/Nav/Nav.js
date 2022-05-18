@@ -1,45 +1,45 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { FaDev } from '@react-icons/all-files/fa/FaDev';
-import NavLinks from '../NavLinks/NavLinks';
-import './Nav.css';
-import SideDrawer from '../SideDrawer/SideDrawer';
-import { useHttpClient } from '../../../hooks/useHttpClient';
-import { NavLink } from 'react-router-dom';
-import { AuthContext } from '../../../context/auth';
-import useAuth from '../../../hooks/useAuth';
+import React, { useContext, useEffect, useState } from 'react'
+import { FaDev } from '@react-icons/all-files/fa/FaDev'
+import NavLinks from '../NavLinks/NavLinks'
+import './Nav.css'
+import SideDrawer from '../SideDrawer/SideDrawer'
+import { useHttpClient } from '../../../hooks/useHttpClient'
+import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../../../context/auth'
+import useAuth from '../../../hooks/useAuth'
 
 const Nav = ({ children, onSearchIconClick }) => {
-  const { userId, currentUser } = useAuth();
+  const { userId, currentUser } = useAuth()
 
-  const { sendReq } = useHttpClient();
-  const [unreadNotifications, setUnreadNotifications] = useState([]);
+  const { sendReq } = useHttpClient()
+  const [unreadNotifications, setUnreadNotifications] = useState([])
 
-  const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+  const [drawerIsOpen, setDrawerIsOpen] = useState(false)
 
   const openDrawerHandler = () => {
-    setDrawerIsOpen(true);
-  };
+    setDrawerIsOpen(true)
+  }
 
   const closeDrawerHandler = () => {
-    setDrawerIsOpen(false);
-  };
+    setDrawerIsOpen(false)
+  }
 
-  useEffect(() => {
-    if (userId) {
-      const fetchUnreadNotifications = async () => {
-        try {
-          const responseData = await sendReq(
-            `${process.env.REACT_APP_BASE_URL}/users/${userId}/notifications/unread`,
-            'GET',
-            null,
-            {}
-          );
-          setUnreadNotifications(responseData.notifications);
-        } catch (err) {}
-      };
-      fetchUnreadNotifications();
-    }
-  }, [sendReq, userId, currentUser]);
+  // useEffect(() => {
+  //   if (userId) {
+  //     const fetchUnreadNotifications = async () => {
+  //       try {
+  //         const responseData = await sendReq(
+  //           `${process.env.REACT_APP_BASE_URL}/users/${userId}/notifications/unread`,
+  //           'GET',
+  //           null,
+  //           {}
+  //         );
+  //         setUnreadNotifications(responseData.notifications);
+  //       } catch (err) {}
+  //     };
+  //     fetchUnreadNotifications();
+  //   }
+  // }, [sendReq, userId, currentUser]);
 
   // useEffect(() => {
   //   current?.on('notificationReceived', (data) => {
@@ -68,7 +68,7 @@ const Nav = ({ children, onSearchIconClick }) => {
         />
       </nav>
     </div>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav

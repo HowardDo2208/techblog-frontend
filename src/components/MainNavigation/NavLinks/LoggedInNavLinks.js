@@ -32,7 +32,7 @@ export const LoggedInNavLinks = ({ unreadNotifications, setUnreadNotifications, 
           Create Post
         </NavLink>
       </li>
-      <li className="list__item list__item--notifs hvr-bg-lt" onClick={handleClick}>
+      {/* <li className="list__item list__item--notifs hvr-bg-lt" onClick={handleClick}>
         <NavLink className="link" to={`/users/${userId}/notifications`} exact>
           <div className="link--notifs-icon">
             <RiNotificationLine size="2.5rem" />
@@ -41,7 +41,7 @@ export const LoggedInNavLinks = ({ unreadNotifications, setUnreadNotifications, 
             )}
           </div>
         </NavLink>
-      </li>
+      </li> */}
 
       <li>
         <button className="btn nav__btn" onClick={handleDropdown} onBlur={() => setShowMenu(false)}>
