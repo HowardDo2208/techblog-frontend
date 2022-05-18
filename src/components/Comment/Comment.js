@@ -43,11 +43,11 @@ const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
           <AuthModal onClose={() => setShowModal(false)} show={showModal} />
           <div className="preview__reactions">
             <div className="preview__reactions--left">
-              <LikeComment
+              {/* <LikeComment
                 likes={comment.likes}
                 commentId={comment.id}
                 setShowModal={setShowModal}
-              />
+              /> */}
               <ReplyButton
                 currentUserId={currentUserId}
                 comment={comment}

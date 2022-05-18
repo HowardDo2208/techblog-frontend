@@ -8,7 +8,7 @@ import ErrorModal from '../Modal/ErrorModal'
 export const DeletePost = ({ authorId }) => {
   const { sendReq, error, clearError } = useHttpClient()
   const navigate = useNavigate()
-  const { titleURL, postId } = useParams()
+  const { postId } = useParams()
   const { currentUser } = useAuth()
   const currentUserId = currentUser && currentUser.id
   const [showConfirmModal, setShowConfirmModal] = useState(false)
@@ -28,7 +28,7 @@ export const DeletePost = ({ authorId }) => {
   const handleDelete = async () => {
     try {
       await sendReq(
-        `${process.env.REACT_APP_BASE_URL}/posts/${titleURL}/${postId}`,
+        `${process.env.REACT_APP_BASE_URL}/posts/${postId}`,
         'DELETE',
         JSON.stringify({ author: currentUserId }),
         {
