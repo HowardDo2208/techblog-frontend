@@ -18,6 +18,7 @@ import SearchResults from './pages/SearchResults/SearchResults'
 import NewPost from './pages/NewPost/NewPost'
 import EditUserProfile from './pages/EditUserProfile/EditUserProfile'
 import PostDetail from './pages/PostDetail/PostDetail'
+import ReadingList from './pages/ReadingList/ReadingList'
 
 SuperTokens.init({
   appInfo,
@@ -39,10 +40,8 @@ function App() {
         {getSuperTokensRoutesForReactRouterDom(reactRouterDom)}
         <Route path="/users/:userId" element={<UserProfile />} />
         <Route path="/users/:userId/edit" element={<EditUserProfile />} />
-        {/* <Route path="/users/:userId/readinglist" exact>
-            <ReadingList />
-          </Route>
-          <Route path="/users/:userId/notifications" exact>
+        <Route path="/users/:userId/readinglist" element={<ReadingList />} />
+        {/* <Route path="/users/:userId/notifications" exact>
             <Notifications />
           </Route> */}
         {/* <Route path="/tags" exact>
