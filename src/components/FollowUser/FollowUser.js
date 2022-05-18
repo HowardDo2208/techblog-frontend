@@ -16,6 +16,7 @@ export const FollowUser = ({ followId, setShowModal, followers, userToFollow }) 
   }, [followers, currentUserId])
 
   const handleFollow = () => {
+    console.log('currentuser', currentUser)
     !currentUserId ? setShowModal(true) : followUser(followId)
   }
 

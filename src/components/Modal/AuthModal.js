@@ -1,9 +1,9 @@
-import { FaDev } from '@react-icons/all-files/fa/FaDev';
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { GuestNavLinks } from '../MainNavigation/NavLinks/GuestNavLinks';
+import { FaDev } from '@react-icons/all-files/fa/FaDev'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { GuestNavLinks } from '../MainNavigation/NavLinks/GuestNavLinks'
 
-import Modal from './Modal';
+import Modal from './Modal'
 
 const AuthModal = (props) => {
   return (
@@ -18,7 +18,7 @@ const AuthModal = (props) => {
         </ul>
       </div>
     </Modal>
-  );
-};
+  )
+}
 
-export default AuthModal;
+export default AuthModal

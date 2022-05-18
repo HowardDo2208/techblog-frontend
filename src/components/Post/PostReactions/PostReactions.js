@@ -17,12 +17,12 @@ const PostReactions = ({ post, setShowModal, handleInteraction }) => {
         setShowModal={setShowModal}
         handleReaction={handleReaction}
       />
-      <UnicornPost
+      {/* <UnicornPost
         unicorns={unicorns}
         isUnicorned={isUnicorned}
         setShowModal={setShowModal}
         handleReaction={handleReaction}
-      />
+      /> */}
       <BookmarkPost
         bookmarks={bookmarks}
         isBookmarked={isBookmarked}
