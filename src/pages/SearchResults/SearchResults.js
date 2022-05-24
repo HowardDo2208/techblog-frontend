@@ -13,14 +13,9 @@ const SearchResults = (props) => {
 
   return (
     <Layout>
-      <div className="container-layout">
-        <div className="container-sidebar">
-          <LeftSideBar />
-        </div>
-        <div style={{ width: '100%' }}>
-          <h2 className="results__heading">Search results for {searchValue}</h2>
-          <PostList cover={false} items={searchResults} isLoading={isLoading} />
-        </div>
+      <div style={{ width: '100%' }}>
+        <h2 className="results__heading">Search results for {searchValue}</h2>
+        <PostList cover={false} items={searchResults} isLoading={isLoading} />
       </div>
     </Layout>
   )

@@ -22,13 +22,8 @@ const Home = () => {
 
   return (
     <Layout>
-      <div className="container-layout">
-        <div className="container-sidebar">
-          <LeftSideBar />
-        </div>
-        <Posts cover={true} />
-        {/* <RightSideBar tags={tags} isLoading={isLoading} /> */}
-      </div>
+      <Posts cover={true} />
+      {/* <RightSideBar tags={tags} isLoading={isLoading} /> */}
     </Layout>
   )
 }

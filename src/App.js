@@ -19,6 +19,7 @@ import NewPost from './pages/NewPost/NewPost'
 import EditUserProfile from './pages/EditUserProfile/EditUserProfile'
 import PostDetail from './pages/PostDetail/PostDetail'
 import ReadingList from './pages/ReadingList/ReadingList'
+import Tag from './pages/Tag/Tag'
 
 SuperTokens.init({
   appInfo,
@@ -46,10 +47,8 @@ function App() {
           </Route> */}
         {/* <Route path="/tags" exact>
             <Tags />
-          </Route>
-          <Route path="/tags/:tagName" exact>
-            <Tag />
           </Route> */}
+        <Route path="/tags/:tagName" element={<Tag />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/posts/new" element={<NewPost />} />
         <Route path="/posts/:slug/:postId" element={<PostDetail />} />
