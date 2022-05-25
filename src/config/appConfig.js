@@ -1,7 +1,7 @@
 export const appInfo = {
   appName: 'techblog',
-  apiDomain: process.env.PUBLIC_API_DOMAIN || 'http://localhost:3000',
-  websiteDomain: process.env.PUBLIC_API_DOMAIN || 'http://localhost:3080',
+  apiDomain: process.env.PUBLIC_API_DOMAIN,
+  websiteDomain: process.env.PUBLIC_API_DOMAIN,
   apiBasePath: '/auth',
   websiteBasePath: '/auth'
 }
